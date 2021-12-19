@@ -44,6 +44,7 @@ $routes->get('user', 'Masterdata::user',['filter' => 'auth']);
 
 $routes->get('pembelian', 'Pembelian::index',['filter' => 'auth']);
 $routes->get('pembelian/laporan-pembelian', 'Pembelian::laporan_pembelian',['filter' => 'auth']);
+$routes->add('pembelian/laporan-pembelian', 'Pembelian::laporan_pembelian',['filter' => 'auth']);
 
 $routes->get('penjualan', 'Penjualan::index',['filter' => 'auth']);
 

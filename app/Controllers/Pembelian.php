@@ -146,7 +146,31 @@ class Pembelian extends BaseController
 
     public function laporan_pembelian()
     {
-        return view('pembelian/laporan_pembelian');
+        $tgl_awal = $this->request->getPost('tgl_awal');
+        $tgl_akhir = $this->request->getPost('tgl_akhir');
+
+        // print_r($tgl_awal);
+
+        $sql = "SELECT a.*, qty, b.harga, subtotal, nama
+        FROM pembelian a
+        JOIN detail_pembelian b ON a.invoice = b.invoice
+        JOIN bahan_baku c ON c.id = b.id_barang ";
+
+        if (isset($tgl_awal, $tgl_akhir)) {
+            $sql .= "WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'";
+            $list = $this->db->query($sql)->getResult();
+
+            $data = [
+                'list' => $list,
+            ];
+        } else {
+            $list = $this->db->query($sql)->getResult();
+
+            $data = [
+                'list' => $list,
+            ];
+        }
+        return view('pembelian/laporan_pembelian', $data);
     }
 
     // membuat id otomatis pada pembelian
