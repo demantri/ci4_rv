@@ -51,7 +51,6 @@
                                 <th>Bahan Baku</th>
                                 <th>Qty</th>
                                 <th>Subtotal</th>
-                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,8 +63,7 @@
                                 <td><?= $value->tanggal ?></td>
                                 <td><?= $value->nama ?></td>
                                 <td><?= $value->qty ?></td>
-                                <td><?= $value->subtotal ?></td>
-                                <td><?= $value->invoice ?></td>
+                                <td><?= format_rupiah($value->subtotal) ?></td>
                             </tr>
                         <?php } ?>
                         </tbody>
@@ -92,14 +90,14 @@
             $("#tgl_awal").datepicker("option","maxDate", selected)
             }
         });
-        
+
         $("#t1").DataTable({
         "responsive": true, 
         "lengthChange": false, 
         "autoWidth": false,
         "buttons": [
-            "copy", 
-            "csv", 
+            // "copy", 
+            // "csv", 
             "excel", 
             "pdf", 
             "print", 
