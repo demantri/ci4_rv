@@ -28,6 +28,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?= base_url('coa')?>" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>COA</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= base_url('produk')?>" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Produk</p>
@@ -88,7 +94,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?= base_url('coa')?>" class="nav-link">
+                <a href="<?= base_url('jurnal')?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Jurnal</p>
                 </a>

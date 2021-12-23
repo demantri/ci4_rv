@@ -141,6 +141,9 @@ class Pembelian extends BaseController
             
             $this->db->table('bahan_baku')->where($where)->update($bb);
         }
+
+        // insert jurnal
+        
         return redirect()->to(base_url('pembelian'));
     }
 

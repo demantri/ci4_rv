@@ -36,6 +36,7 @@ $routes->get('login', 'Login::index');
 $routes->get('dashboard', 'Dashboard::index',['filter' => 'auth']);
 
 $routes->get('bahan-baku', 'Masterdata::bahan_baku',['filter' => 'auth']);
+$routes->get('coa', 'Masterdata::coa',['filter' => 'auth']);
 $routes->get('supplier', 'Masterdata::supplier',['filter' => 'auth']);
 $routes->get('produk', 'Masterdata::produk',['filter' => 'auth']);
 // admin only
@@ -47,6 +48,8 @@ $routes->get('pembelian/laporan-pembelian', 'Pembelian::laporan_pembelian',['fil
 $routes->add('pembelian/laporan-pembelian', 'Pembelian::laporan_pembelian',['filter' => 'auth']);
 
 $routes->get('penjualan', 'Penjualan::index',['filter' => 'auth']);
+
+$routes->get('jurnal', 'Laporan::jurnal_umum',['filter' => 'auth']);
 
 $routes->get('notification', 'MessageController::showSweetAlertMessages');
 

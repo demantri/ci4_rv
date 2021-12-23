@@ -212,4 +212,46 @@ class Masterdata extends BaseController
 
         return redirect()->to(base_url('user'));
     }
+
+    public function coa()
+    {
+        $list = $this->db->table('coa')->where('deleted', 0)->get()->getResult();
+        $data = [
+            'list' => $list,
+        ];
+        return view('coa/index', $data);
+    }
+
+    public function save_coa()
+    {
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'no_coa' => [
+                'label'  => 'Rules.no_coa',
+                'rules'  => 'is_unique[coa.no_coa]',
+                'errors' => [
+                    'is_unique' => 'Rules.no_coa.is_unique',
+                ],
+            ],
+        ]);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if ($isDataValid) {
+            $no_coa = $this->request->getPost('no_coa');
+            $header = substr($no_coa, 0, 1);
+            $nama_coa = $this->request->getPost('nama_coa');
+            $posisi_dr_cr = $this->request->getPost('posisi_dr_cr');
+            $saldo_awal = $this->request->getPost('saldo_awal');
+    
+            $data = [
+                'no_coa' => $no_coa, 
+                'nama_coa' => ucwords($nama_coa), 
+                'header' => $header, 
+                'posisi_dr_cr' => $posisi_dr_cr, 
+                'saldo_awal' => $saldo_awal, 
+            ];
+            $this->db->table('coa')
+            ->insert($data);
+        }
+        return redirect()->to(base_url('coa'));
+    }
 }
