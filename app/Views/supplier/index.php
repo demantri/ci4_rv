@@ -38,8 +38,9 @@
                                 <td><?= $value->nama ?></td>
                                 <td><?= $value->alamat ?></td>
                                 <td><?= $value->no_telp ?></td>
-                                <td class="text-center" style="width: 10%;">
-                                    <a href="" class="btn btn-sm btn-default">Edit</a>
+                                <td class="text-center">
+                                    <a href="#edit_<?= $value->id?>" data-toggle="modal" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="<?= base_url('Masterdata/delete/'.$value->id.'/'."supplier")?>" class="btn btn-danger btn-sm" onclick="return confirm('anda yakin?')">Hapus</a>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -52,4 +53,5 @@
     </div>
 </div>
 <?= $this->include('supplier/add') ?>
+<?= $this->include('supplier/edit') ?>
 <?= $this->endSection() ?>

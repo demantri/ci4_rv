@@ -28,6 +28,7 @@
                                 <th>Posisi Debit/Kredit</th>
                                 <th>Header</th>
                                 <th>Saldo Awal</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,10 @@
                                     <td><?= $value->posisi_dr_cr == 'd' ? 'Debit' : 'Kredit' ?></td>
                                     <td><?= $value->header?></td>
                                     <td><?= format_rupiah($value->saldo_awal)?></td>
+                                    <td>
+                                        <a href="#edit_<?= $value->id?>" data-toggle="modal" class="btn btn-sm btn-warning">Edit</a>
+                                        <a href="<?= base_url('Masterdata/delete/'.$value->id.'/'."coa")?>" onclick="return confirm('anda yakin?')" class="btn btn-sm btn-danger">Hapus</a>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -52,6 +57,7 @@
     </div>
 </div>
 <?= $this->include('coa/add') ?>
+<?= $this->include('coa/edit') ?>
 <?= $this->endSection() ?>
 <?= $this->Section('script')?>
 <script>

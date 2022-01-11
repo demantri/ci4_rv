@@ -98,7 +98,7 @@ class Masterdata extends BaseController
 
     public function supplier()
     {
-        $list = $this->db->table('supplier')->get()->getResult();
+        $list = $this->db->table('supplier')->where('deleted', 0)->get()->getResult();
         $data = [
             'list' => $list,
         ];
@@ -135,9 +135,26 @@ class Masterdata extends BaseController
         return redirect()->to(base_url('supplier'));
     }
 
+    public function update_supplier()
+    {
+        $id = $this->request->getPost('id');
+        $nama = $this->request->getPost('nama');
+        $alamat = $this->request->getPost('alamat');
+        $no_telp = $this->request->getPost('no_telp');
+        $data = [
+            'nama' => $nama, 
+            'alamat' => $alamat, 
+            'no_telp' => $no_telp,
+        ];
+        $this->db->table('supplier')
+        ->where('id', $id)
+        ->update($data);
+        return redirect()->to(base_url('supplier'));
+
+    }
+
     public function role()
     {
-        // print_r($sess);exit;
         $list = $this->db->table('role')->get()->getResult();
         $data = [
             'list' => $list,
@@ -253,5 +270,40 @@ class Masterdata extends BaseController
             ->insert($data);
         }
         return redirect()->to(base_url('coa'));
+    }
+
+    public function update_coa()
+    {
+        $id = $this->request->getPost('id');
+        $no_coa = $this->request->getPost('no_coa');
+        $nama_coa = $this->request->getPost('nama_coa');
+        $posisi_dr_cr = $this->request->getPost('posisi_dr_cr');
+        $saldo_awal = $this->request->getPost('saldo_awal');
+
+        $data = [
+            'posisi_dr_cr' => $posisi_dr_cr, 
+            'saldo_awal' => $saldo_awal, 
+        ];
+        $this->db->table('coa')->where('id', $id)->update($data);
+        return redirect()->to(base_url('coa'));
+
+    }
+
+    public function delete($id, $jenis)
+    {
+        $data = [
+            'deleted' => 1,
+        ];
+        if ($jenis == 'coa') {
+            $this->db->table('coa')
+            ->where('id', $id)
+            ->update($data);
+            return redirect()->to(base_url('coa'));
+        } else if ($jenis == 'supplier') {
+            $this->db->table('supplier')
+            ->where('id', $id)
+            ->update($data);
+            return redirect()->to(base_url('supplier'));
+        }
     }
 }
