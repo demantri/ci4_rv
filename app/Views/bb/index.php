@@ -15,8 +15,14 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="card-body">
+
+                <?php if (session()->getFlashdata('error')) : ?>
+                    <div class="alert alert-danger" role="alert"><?= $validation->listErrors()?></div>
+                <?php endif; ?>
+                <?php if (session()->getFlashdata('success')) : ?>
+                    <div class="alert alert-success" role="alert"><?= session()->getFlashdata('success') ?></div>
+                <?php endif; ?>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -42,11 +48,10 @@
                                     <td><?= $value->satuan ?></td>
                                     <td><?= $value->jumlah ?></td>
                                     <td class="text-center" style="width:15%;">
-                                        <?= $value->status == 0 ? '<button class="btn btn-sm btn-warning">Belum melakukan pembelian</button>' : '<button class="btn btn-sm btn-success">Sudah melakukan pembelian</button>'; ?>
+                                        <?= $value->status == 0 ? '<span class="badge badge-warning">Belum melakukan pembelian</span>' : '<span class="badge badge-success">Sudah melakukan pembelian</span>'; ?>
                                     </td>
                                     <td class="text-center" style="width:15%;">
-                                        <a href="" class="btn btn-sm btn-primary">Pembelian Bahan Baku</a>
-                                        <!-- <a href="" class="btn btn-sm btn-primary">Detail</a> -->
+                                        <a href="<?= base_url('pembelian')?>" class="btn btn-sm btn-default">Pembelian Bahan Baku</a>
                                     </td>
                                 </tr>
                             <?php } ?>

@@ -15,24 +15,43 @@ class Masterdata extends BaseController
         $list = $this->db->table('bahan_baku')->get()->getResult();
         $data = [
             'list' => $list,
+            'validation' => \Config\Services::validation()
         ];
         return view('bb/index', $data);
     }
 
     public function save_bb()
     {
-        $validation = \Config\Services::validation();
-        $validation->setRules([
+        $valid = $this->validate([
             'nama' => [
-                'label'  => 'Rules.nama',
-                'rules'  => 'is_unique[bahan_baku.nama]',
+                'label' => 'Nama bahan baku',
+                'rules' => 'required|is_unique[bahan_baku.nama]',
                 'errors' => [
-                    'is_unique' => 'Rules.nama.is_unique',
-                ],
+                    'required' => '{field} tidak boleh kosong.',
+                    'is_unique' => '{field} sudah terdaftar didatabase.',
+                ]
+            ],
+            'harga' => [
+                'label' => 'Harga bahan baku',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong.',
+                ]
+            ],
+            'satuan' => [
+                'label' => 'Satuan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong.',
+                ]
             ],
         ]);
-        $isDataValid = $validation->withRequest($this->request)->run();
-        if ($isDataValid) {
+        
+        if (!$valid) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        } 
+        else {
             $nama = $this->request->getPost('nama');
             $harga = $this->request->getPost('harga');
             $satuan = $this->request->getPost('satuan');
@@ -44,9 +63,11 @@ class Masterdata extends BaseController
             ];
             $this->db->table('bahan_baku')
             ->insert($data);
-        }
 
-        return redirect()->to(base_url('bahan-baku'));
+            session()->setFlashdata("success", "Data berhasil disimpan.");
+    
+            return redirect()->to(base_url('bahan-baku'));
+        }
     }
 
     public function produk()
