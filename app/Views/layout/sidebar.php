@@ -81,6 +81,12 @@
                     <p>Penjualan</p>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="<?= base_url('produksi')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Produksi Bahan Baku</p>
+                </a>
+                </li>
             </ul>
             </li>
 
