@@ -8,10 +8,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-11">
-                            <h4>Pembelian Bahan Baku</h4>
+                            <h4>Detail Pembelian <?= '# ' . $list[0]->invoice ?></h4>
                         </div>
                         <div class="col-sm-1">
-                            <a href="<?= base_url('pembelian/add')?>" class="btn btn-primary">Tambah</a>
+                            <a href="<?= base_url('pembelian')?>" class="btn btn-default">Kembali</a>
                         </div>
                     </div>
                 </div>
@@ -24,11 +24,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Invoice</th>
-                                <th>Tanggal</th>
-                                <th>Supplier</th>
+                                <th>Bahan Baku</th>
+                                <th>Qty</th>
+                                <th>Harga</th>
                                 <th>Total Transaksi</th>
-                                <th>Status</th>
-                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,15 +37,10 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->invoice ?></td>
-                                <td><?= $value->tanggal ?></td>
                                 <td><?= $value->nama ?></td>
-                                <td><?= format_rupiah($value->total) ?></td>
-                                <td>
-                                    <span class="badge badge-success"><?= ucwords($value->status) ?></span>
-                                </td>
-                                <td class="text-center" style="width: 10%;">
-                                    <a href="<?= base_url('pembelian/detail/' . $value->invoice)?>" class="btn btn-sm btn-default">Detail</a>
-                                </td>
+                                <td><?= $value->qty ?></td>
+                                <td><?= format_rupiah($value->harga) ?></td>
+                                <td><?= format_rupiah($value->subtotal) ?></td>
                             </tr>
                             <?php } ?>
                         </tbody>

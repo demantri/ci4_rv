@@ -164,6 +164,36 @@ class Penjualan extends BaseController
         return redirect()->to(base_url('penjualan'));
     }
 
+    public function laporan_penjualan()
+    {
+        $tgl_awal = $this->request->getPost('tgl_awal');
+        $tgl_akhir = $this->request->getPost('tgl_akhir');
+
+        // print_r($tgl_awal);
+
+        $sql = "SELECT a.*
+        FROM penjualan a
+        JOIN detail_penjualan b ON a.invoice = b.invoice
+        JOIN produk c ON c.id = b.id_barang ";
+
+        if (isset($tgl_awal, $tgl_akhir)) {
+            $sql .= "WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir' GROUP BY a.invoice";
+            $list = $this->db->query($sql)->getResult();
+
+            $data = [
+                'list' => $list,
+            ];
+        } else {
+            $sql .= "GROUP BY a.invoice";
+            $list = $this->db->query($sql)->getResult();
+
+            $data = [
+                'list' => $list,
+            ];
+        }
+        return view('penjualan/laporan_penjualan', $data);
+    }
+
     public function kode()
     {
         $builder = $this->db->table('penjualan')

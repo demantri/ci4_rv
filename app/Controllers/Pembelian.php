@@ -176,6 +176,19 @@ class Pembelian extends BaseController
         return view('pembelian/laporan_pembelian', $data);
     }
 
+    public function detail($invoice)
+    {
+        $sql = $this->db->query("SELECT a.*, b.nama
+        FROM detail_pembelian a 
+        JOIN bahan_baku b ON a.id_barang = b.id
+        WHERE a.invoice = '$invoice'
+        ")->getResult();
+        $data = [
+            'list' => $sql
+        ];
+        return view('pembelian/detail', $data);
+    }
+
     // membuat id otomatis pada pembelian
     public function kode()
     {

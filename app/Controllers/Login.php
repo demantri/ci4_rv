@@ -33,11 +33,11 @@ class Login extends BaseController
                 $session->set($ses_data);
                 return redirect()->to(base_url('dashboard'));
             }else{
-                $session->setFlashdata('msg', 'Wrong Password');
+                $session->setFlashdata('msg', 'Password salah. Silahkan ulangi kembali.');
                 return redirect()->to(base_url('login'));
             }
         }else{
-            $session->setFlashdata('msg', 'Email not Found');
+            $session->setFlashdata('msg', 'Username tidak ditemukan.');
             return redirect()->to(base_url('login'));
         }
     }

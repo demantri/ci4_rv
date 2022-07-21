@@ -23,7 +23,11 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg"></p>
+      <p class="login-box-msg">
+      <?php if (session()->getFlashdata('msg')) : ?>
+          <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('msg') ?></div>
+      <?php endif; ?>
+      </p>
 
       <form action="<?= base_url('Login/auth')?>" method="post">
         <div class="input-group mb-3">
