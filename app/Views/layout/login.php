@@ -23,11 +23,13 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">
       <?php if (session()->getFlashdata('msg')) : ?>
+      <div class="notif">
+        <p class="login-box-msg">
           <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('msg') ?></div>
+        </p>
+      </div>
       <?php endif; ?>
-      </p>
 
       <form action="<?= base_url('Login/auth')?>" method="post">
         <div class="input-group mb-3">
@@ -68,5 +70,10 @@
 <script src="<?= base_url('assets')?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets')?>/dist/js/adminlte.min.js"></script>
+<script>
+    $(".notif").fadeTo(2000, 500).slideUp(500, function(){
+      $(".notif").slideUp(500);
+		});
+</script>
 </body>
 </html>

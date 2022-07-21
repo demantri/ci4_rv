@@ -127,7 +127,7 @@
             </li>
         <?php } ?>
         <li class="nav-item">
-            <a href="<?= base_url('Login/logout')?>" class="nav-link">
+            <a href="<?= base_url('Login/logout')?>" class="nav-link" onclick="return confirm('Apakah anda yakin ingin logout?')">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
                 Logout

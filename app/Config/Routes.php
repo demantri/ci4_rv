@@ -35,12 +35,21 @@ $routes->get('login', 'Login::index');
 
 $routes->get('dashboard', 'Dashboard::index',['filter' => 'auth']);
 
+// $routes->group('bahan-baku', static function ($routes) {
+//     $routes->get('/', 'Masterdata::bahan_baku',['filter' => 'auth']);
+//     $routes->add('/update', 'Masterdata::update_bahan_baku',['filter' => 'auth']);
+// });
+
 $routes->get('bahan-baku', 'Masterdata::bahan_baku',['filter' => 'auth']);
+$routes->add('bahan-baku/update', 'Masterdata::update_bahan_baku',['filter' => 'auth']);
+
 $routes->get('coa', 'Masterdata::coa',['filter' => 'auth']);
 $routes->get('supplier', 'Masterdata::supplier',['filter' => 'auth']);
 $routes->get('produk', 'Masterdata::produk',['filter' => 'auth']);
 // admin only
 $routes->get('role', 'Masterdata::role',['filter' => 'auth']);
+$routes->add('role/update', 'Masterdata::update_role',['filter' => 'auth']);
+
 $routes->get('user', 'Masterdata::user',['filter' => 'auth']);
 
 $routes->get('pembelian', 'Pembelian::index',['filter' => 'auth']);

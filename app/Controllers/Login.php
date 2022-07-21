@@ -31,6 +31,7 @@ class Login extends BaseController
                     'logged_in'     => TRUE
                 ];
                 $session->set($ses_data);
+                $session->setFlashdata('msg', 'Berhasil login. Selamat datang, ' . ucwords(session('username')));
                 return redirect()->to(base_url('dashboard'));
             }else{
                 $session->setFlashdata('msg', 'Password salah. Silahkan ulangi kembali.');

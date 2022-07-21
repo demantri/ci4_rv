@@ -34,7 +34,11 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->desc ?></td>
-                                <td></td>
+                                <td>
+                                    <button class="btn btn-warning btn-edit" data-toggle="modal" data-target="#edit" 
+                                    data-id="<?= $value->id ?>"
+                                    data-desc="<?= $value->desc ?>">Edit</button>
+                                </td>
                             </tr>
                         <?php } ?>
                         </tbody>
@@ -46,4 +50,16 @@
     </div>
 </div>
 <?= $this->include('role/add') ?>
+<?= $this->include('role/edit') ?>
 <?= $this->endSection() ?>
+<?= $this->section('script'); ?>
+<script>
+    $(document).on("click", ".btn-edit", function() {
+        var id = $(this).data("id");
+        var desc = $(this).data("desc");
+
+        $(".modal-body #id").val(id);
+        $(".modal-body #desc").val(desc);
+    })
+</script>
+<?= $this->endSection(); ?>

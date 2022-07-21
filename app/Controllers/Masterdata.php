@@ -70,6 +70,58 @@ class Masterdata extends BaseController
         }
     }
 
+    public function update_bahan_baku()
+    {
+        $valid = $this->validate([
+            'nama' => [
+                'label' => 'Nama bahan baku',
+                'rules' => 'required|is_unique[bahan_baku.nama]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong.',
+                    'is_unique' => '{field} sudah terdaftar didatabase.',
+                ]
+            ],
+            'harga' => [
+                'label' => 'Harga bahan baku',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong.',
+                ]
+            ],
+            'satuan' => [
+                'label' => 'Satuan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong.',
+                ]
+            ],
+        ]);
+        
+        if (!$valid) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        } 
+        else {
+            $nama = $this->request->getPost('nama');
+            $harga = $this->request->getPost('harga');
+            $satuan = $this->request->getPost('satuan');
+            $id = $this->request->getPost('id');
+
+            $data = [
+                'nama' => $nama, 
+                'harga' => $harga, 
+                'satuan' => $satuan,
+            ];
+            $this->db->table('bahan_baku')
+            ->where('id', $id)
+            ->update($data);
+
+            session()->setFlashdata("success", "Data berhasil diubah.");
+    
+            return redirect()->to(base_url('bahan-baku'));
+        }   
+    }
+
     public function produk()
     {
         $list = $this->db->table('produk')->get()->getResult();
@@ -204,6 +256,33 @@ class Masterdata extends BaseController
             ];
             $this->db->table('role')
             ->insert($data);
+        }
+
+        return redirect()->to(base_url('role'));
+    }
+
+    public function update_role()
+    {
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'desc' => [
+                'label'  => 'Rules.desc',
+                'rules'  => 'is_unique[role.desc]',
+                'errors' => [
+                    'is_unique' => 'Rules.desc.is_unique',
+                ],
+            ],
+        ]);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if ($isDataValid) {
+            $desc = $this->request->getPost('desc');
+            $id = $this->request->getVar('id');
+            $data = [
+                'desc' => $desc,
+            ];
+            $this->db->table('role')
+            ->where('id', $id)
+            ->update($data);
         }
 
         return redirect()->to(base_url('role'));
