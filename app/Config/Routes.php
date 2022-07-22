@@ -45,7 +45,9 @@ $routes->add('bahan-baku/update', 'Masterdata::update_bahan_baku',['filter' => '
 
 $routes->get('coa', 'Masterdata::coa',['filter' => 'auth']);
 $routes->get('supplier', 'Masterdata::supplier',['filter' => 'auth']);
+
 $routes->get('produk', 'Masterdata::produk',['filter' => 'auth']);
+$routes->add('produk/update', 'Masterdata::update_produk',['filter' => 'auth']);
 // admin only
 $routes->get('role', 'Masterdata::role',['filter' => 'auth']);
 $routes->add('role/update', 'Masterdata::update_role',['filter' => 'auth']);

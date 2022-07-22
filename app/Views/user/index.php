@@ -25,7 +25,8 @@
                                 <th>#</th>
                                 <th>Username</th>
                                 <th>Password</th>
-                                <th class="text-center">Aksi</th>
+                                <th>Role</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,7 +37,8 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->username ?></td>
                                 <td><?= $value->password ?></td>
-                                <td></td>
+                                <td><?= ucwords($value->role_name) ?></td>
+                                <td><?= ($value->status == '1') ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak aktif</span>' ?></td>
                             </tr>
                         <?php } ?>
                         </tbody>

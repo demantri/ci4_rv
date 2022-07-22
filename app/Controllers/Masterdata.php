@@ -169,6 +169,43 @@ class Masterdata extends BaseController
         return redirect()->to(base_url('produk'));
     }
 
+    public function update_produk()
+    {
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'nama' => [
+                'label'  => 'Rules.nama',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                ],
+            ],
+        ]);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if ($isDataValid) {
+            $nama = $this->request->getPost('nama');
+            // $bb = $this->request->getPost('bb[]');
+            $harga_jual = $this->request->getPost('harga_jual');
+            $harga_modal = $this->request->getPost('harga_modal');
+            $stok = $this->request->getPost('stok');
+            $id = $this->request->getPost('id');
+    
+            $data = [
+                'nama' => $nama, 
+                // 'bahan_baku' => $bb, 
+                'harga_jual' => $harga_jual,
+                'harga_modal' => $harga_modal,
+                'stok' => $stok,
+            ];
+            // print_r($data);exit;
+            $this->db->table('produk')
+            ->where('id', $id)
+            ->update($data);
+        }
+
+        return redirect()->to(base_url('produk'));
+    }
+
     public function supplier()
     {
         $list = $this->db->table('supplier')->where('deleted', 0)->get()->getResult();
@@ -290,7 +327,10 @@ class Masterdata extends BaseController
 
     public function user()
     {
-        $list = $this->db->table('user')->get()->getResult();
+        // $list = $this->db->table('user')->get()->getResult();
+        $list = $this->db->query("SELECT a.*, b.desc as role_name
+        FROM user a
+        JOIN role b ON a.role_id = b.id")->getResult();
         $role = $this->db->table('role')->get()->getResult();
         $data = [
             'list' => $list,
