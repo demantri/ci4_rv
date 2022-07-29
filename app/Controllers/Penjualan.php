@@ -212,4 +212,14 @@ class Penjualan extends BaseController
         // print_r($kd);exit;
         return $kd;
     }
+
+    public function list_detail_penjualan()
+    {
+        $invoice = $this->request->getVar('invoice');
+        $sql = $this->db->query("SELECT a.*, b.nama
+        FROM detail_penjualan a
+        JOIN produk b ON a.id_barang = b.id
+        WHERE invoice = '$invoice'")->getResult();
+        echo json_encode($sql);
+    }
 }
