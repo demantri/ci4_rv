@@ -22,12 +22,12 @@
                     <table class="table table-bordered" id="t1">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Invoice</th>
-                                <th>Tanggal</th>
-                                <th>Nama Customer</th>
-                                <th>Total Transaksi</th>
-                                <th>Status</th>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Invoice</th>
+                                <th class="text-center">Tanggal</th>
+                                <th class="text-center">Nama Customer</th>
+                                <th class="text-center">Total Transaksi</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -41,9 +41,15 @@
                                 <td><?= $value->tanggal ?></td>
                                 <td><?= $value->nama_pelanggan ?></td>
                                 <td><?= format_rupiah($value->total) ?></td>
-                                <td><?= ucwords($value->status) ?></td>
-                                <td>
-                                    <button class="btn btn-default">Detail</button>
+                                <td class="text-center">
+                                    <span class="badge badge-success"><?= ucwords($value->status) ?></span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-default detail"
+                                    data-id="<?= $value->invoice ?>"
+                                    data-toggle="modal"
+                                    data-target="#detail"
+                                    >Detail</button>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -56,6 +62,7 @@
     </div>
 </div>
 <?= $this->endSection() ?>
+<?= $this->include('penjualan/detail');?>
 <?= $this->Section('script')?>
 <script>
     $(document).ready(function (){

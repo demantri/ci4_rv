@@ -65,6 +65,10 @@ $routes->add('penjualan/laporan-penjualan', 'Penjualan::laporan_penjualan',['fil
 
 $routes->get('jurnal', 'Laporan::jurnal_umum',['filter' => 'auth']);
 
+$routes->get('bukubesar', 'Laporan::buku_besar',['filter' => 'auth']);
+$routes->add('bukubesar', 'Laporan::buku_besar',['filter' => 'auth']);
+
+
 $routes->get('notification', 'MessageController::showSweetAlertMessages');
 
 /*
