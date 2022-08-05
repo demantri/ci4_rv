@@ -3,11 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use JurnalModel;
 
 class Pembelian extends BaseController
 {
     public function __construct() {
 		$this->db = \Config\Database::connect();
+        $this->jurnal = new JurnalModel();
 	}
 
     public function index()
@@ -115,6 +117,8 @@ class Pembelian extends BaseController
         $id_bb = $this->request->getPost('id_bb');
         $cek_inv = $this->db->table('detail_pembelian')->where('invoice', $id)->get()->getResult();
 
+        $date = date('Y-m-d');
+
         $data = [
             'id_supplier' => $id_supplier,
             'total' => $total,
@@ -143,6 +147,10 @@ class Pembelian extends BaseController
         }
 
         // insert jurnal
+        /** ngebuat jurnal dengan mengirim berapa parameter, tergantung dari no coa yang di pakek. */
+        /** contoh nya dibawah kas, pada pembelian  atau kalau masih gagal ngejurnal bisa di lihat di transaksi penjualan */
+        // $this->jurnal->generateJurnal($id, $date, '111', 'd', $total);
+        // $this->jurnal->generateJurnal($id, $date, '500', 'k', $total);
         
         return redirect()->to(base_url('pembelian'));
     }
