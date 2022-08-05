@@ -22,12 +22,12 @@
                     <table class="table table-bordered" id="t1">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Invoice</th>
-                                <th>Tanggal</th>
-                                <th>Supplier</th>
-                                <th>Total Transaksi</th>
-                                <th>Status</th>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Invoice</th>
+                                <th class="text-center">Tanggal</th>
+                                <th class="text-center">Supplier</th>
+                                <th class="text-center">Total Transaksi</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -41,10 +41,15 @@
                                 <td><?= $value->tanggal ?></td>
                                 <td><?= $value->nama ?></td>
                                 <td><?= format_rupiah($value->total) ?></td>
-                                <td>
-                                    <span class="badge badge-success"><?= ucwords($value->status) ?></span>
+                                <td class="text-center">
+                                    <?php if ($value->status == 'selesai') {
+                                        echo '<span class="badge badge-success">'.ucwords($value->status).'</span>';
+                                    } else if ($value->status == 'menunggu pembayaran') {
+                                        echo '<span class="badge badge-warning">'.ucwords($value->status).'</span>';
+                                    }
+                                    ?>
                                 </td>
-                                <td class="text-center" style="width: 10%;">
+                                <td class="text-center">
                                     <a href="<?= base_url('pembelian/detail/' . $value->invoice)?>" class="btn btn-sm btn-default">Detail</a>
                                 </td>
                             </tr>

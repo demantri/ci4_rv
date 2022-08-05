@@ -118,7 +118,7 @@ class Pembelian extends BaseController
         $data = [
             'id_supplier' => $id_supplier,
             'total' => $total,
-            'status' => 'selesai',
+            'status' => 'menunggu pembayaran',
         ];
         $this->db->table('pembelian')
         ->where('invoice', $id)
@@ -194,7 +194,7 @@ class Pembelian extends BaseController
     {
         $builder = $this->db->table('pembelian')
         ->select('MAX(RIGHT(pembelian.invoice,3)) as kode')
-        ->where('status', 'selesai')
+        ->where('status', 'menunggu pembayaran')
         ->limit(1)
         ->get();
         if ($builder->getNumRows() <> 0 ) {

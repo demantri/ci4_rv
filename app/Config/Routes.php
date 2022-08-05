@@ -63,6 +63,11 @@ $routes->get('penjualan', 'Penjualan::index',['filter' => 'auth']);
 $routes->get('penjualan/laporan-penjualan', 'Penjualan::laporan_penjualan',['filter' => 'auth']);
 $routes->add('penjualan/laporan-penjualan', 'Penjualan::laporan_penjualan',['filter' => 'auth']);
 
+$routes->get('pembayaran', 'Pembayaran::index',['filter' => 'auth']);
+$routes->get('pembayaran/laporan-pembayaran', 'Pembayaran::laporan_pembayaran',['filter' => 'auth']);
+$routes->add('pembayaran/laporan-pembayaran', 'Pembayaran::laporan_pembayaran',['filter' => 'auth']);
+$routes->add('pembayaran/bayar', 'Pembayaran::bayar',['filter' => 'auth']);
+
 $routes->get('jurnal', 'Laporan::jurnal_umum',['filter' => 'auth']);
 
 $routes->get('bukubesar', 'Laporan::buku_besar',['filter' => 'auth']);

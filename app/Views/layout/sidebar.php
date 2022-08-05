@@ -76,6 +76,12 @@
                 </a>
                 </li>
                 <li class="nav-item">
+                <a href="<?= base_url('pembayaran')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pembayaran Bahan Baku</p>
+                </a>
+                </li>
+                <li class="nav-item">
                 <a href="<?= base_url('penjualan')?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Penjualan</p>
@@ -115,6 +121,12 @@
                 <a href="<?= base_url('pembelian/laporan-pembelian')?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Laporan Pembelian</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="<?= base_url('pembayaran/laporan-pembayaran')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Laporan Pembayaran</p>
                 </a>
                 </li>
                 <li class="nav-item">
