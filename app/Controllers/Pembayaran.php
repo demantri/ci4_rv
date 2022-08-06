@@ -51,6 +51,25 @@ class Pembayaran extends BaseController
         ->where('invoice', $invoice)
         ->update($update);
 
+        /** dibawah ini di uncomend aja, tinggal di sesuaikan jurnal nya apa */
+        // $kas = [
+        //     'id_jurnal' => $id, 
+        //     'tgl_jurnal' => date('Y-m-d'), 
+        //     'no_coa' => 111, 
+        //     'posisi_dr_cr' => 'd', 
+        //     'nominal' => $total, 
+        // ];
+        // $this->db->table('jurnal')->insert($kas);
+
+        // $penjualan = [
+        //     'id_jurnal' => $id, 
+        //     'tgl_jurnal' => date('Y-m-d'), 
+        //     'no_coa' => 400, 
+        //     'posisi_dr_cr' => 'k', 
+        //     'nominal' => $total, 
+        // ];
+        // $this->db->table('jurnal')->insert($penjualan);
+
         return redirect()->to(base_url('pembayaran'));
     }
 
