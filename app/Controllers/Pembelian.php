@@ -3,13 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use JurnalModel;
+// use JurnalModel;
 
 class Pembelian extends BaseController
 {
     public function __construct() {
 		$this->db = \Config\Database::connect();
-        $this->jurnal = new JurnalModel();
+        // $this->jurnal = new JurnalModel();
 	}
 
     public function index()
